@@ -245,7 +245,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20
     var tl = gsap.timeline({
       scrollTrigger: {
         trigger: '.portal', start: 'top top', end: '+=240%', pin: true, scrub: 1.2,
-        snap: { snapTo: 'labels', duration: { min: 0.3, max: 0.8 }, delay: 0.15, ease: 'power2.inOut', inertia: false },
+        snap: { snapTo: 'labelsDirectional', duration: { min: 0.3, max: 0.8 }, delay: 0.15, ease: 'power2.inOut', inertia: false },
         onRefreshInit: aim,
         onUpdate: function(self){ inScene = self.progress > 0.46; paintNav(); }
       }

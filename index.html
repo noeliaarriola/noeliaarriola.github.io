@@ -90,10 +90,19 @@ section.block{padding:clamp(88px,12vw,160px) 0}
 .svc h3{margin:0;font-size:clamp(28px,3.2vw,44px);font-weight:500;letter-spacing:-0.025em;color:var(--ink)}
 .svc p{margin:0;font-size:17px;line-height:1.6;max-width:42ch}
 
-.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:start}
-.case .name{font-size:clamp(56px,9vw,140px);font-weight:560;letter-spacing:-0.05em;line-height:.9;color:var(--ink);margin:0}
-.case p{margin:0 0 20px;font-size:19px;line-height:1.6;max-width:44ch}
-
+.work-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:clamp(32px,5vw,56px)}
+.work-head h2{margin:0}
+.work-note{font-size:14px;color:var(--muted)}
+.work{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,1.6vw,20px);list-style:none;margin:0;padding:0}
+.work li{display:flex;flex-direction:column;gap:12px}
+.work-media{aspect-ratio:1/1;border-radius:14px;overflow:hidden;background-color:#EFEEF3}
+.work h3{margin:0;font-size:17px;font-weight:500;letter-spacing:-0.01em;color:var(--ink)}
+.work p{margin:2px 0 0;font-size:14px;line-height:1.45;color:var(--muted)}
+.w1{background:radial-gradient(at 22% 28%,#F3DCEC 0,transparent 55%),radial-gradient(at 82% 22%,#DCE7F6 0,transparent 50%),radial-gradient(at 60% 82%,#E3F1E8 0,transparent 55%),radial-gradient(at 30% 75%,#E9DFF6 0,transparent 45%),#F1F0F4}
+.w2{background:radial-gradient(circle at 46% 44%,#F7EAF4 0,#E9CFE6 10%,#CFD9F2 20%,#BFDCD0 27%,rgba(40,36,56,.9) 31%,transparent 46%),radial-gradient(circle at 50% 50%,#22202E 0,#0E0E13 70%)}
+.w3{background:repeating-linear-gradient(118deg,rgba(236,214,240,.28) 0 1px,transparent 1px 7px),radial-gradient(at 78% 18%,rgba(234,206,238,.55) 0,transparent 40%),radial-gradient(at 20% 85%,rgba(196,226,222,.35) 0,transparent 45%),#0F0F14}
+.w4{background:repeating-linear-gradient(90deg,rgba(255,255,255,.65) 0 2px,rgba(255,255,255,0) 3px 18px,rgba(120,120,150,.08) 22px 24px),radial-gradient(circle at 55% 48%,#DCCBF2 0,#D5DDF5 24%,transparent 46%),linear-gradient(180deg,#E6EAF4,#E4F2EA)}
+.w5{background:radial-gradient(circle,#EBD8EF 0 22%,#D7E0F4 30%,transparent 33%) 0 0/20% 20%,#F1F0F4}
 .contact h2{font-size:clamp(48px,8vw,128px);max-width:12ch;line-height:.95;letter-spacing:-0.045em}
 .contact p{font-size:19px;line-height:1.6;max-width:44ch;margin:0 0 32px}
 .btn-accent{background:var(--ink);color:var(--bg)}
@@ -101,12 +110,16 @@ section.block{padding:clamp(88px,12vw,160px) 0}
 
 footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20px,4vw,48px) calc(32px + env(safe-area-inset-bottom,0px));font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
 
+@media (max-width:1100px) and (min-width:761px){
+  .work{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
 @media (max-width:760px){
   .brand span{display:none}
   .stems{height:34%}
   .scene-copy{justify-content:flex-start;padding-top:calc(96px + env(safe-area-inset-top,0px));gap:20px}
   .svc{grid-template-columns:minmax(0,1fr);gap:10px}
-  .case{grid-template-columns:minmax(0,1fr)}
+  .work{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:72%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+  .work li{scroll-snap-align:start}
   .intro-line span:first-child{max-width:60%}
   .mail{margin-left:0}
 }
@@ -163,13 +176,19 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20
     </div>
   </section>
 
-  <section class="block" aria-labelledby="case-title">
-    <div class="wrap case">
-      <h2 class="name" id="case-title">Powersis</h2>
-      <div>
-        <p>Powersis began as one engineer working on his own. We led the research, the UX and the website.</p>
-        <p>Today the company has a team and works with large clients, including Light.</p>
+  <section class="block" id="work" aria-labelledby="work-title">
+    <div class="wrap">
+      <div class="work-head">
+        <h2 id="work-title">Selected work</h2>
+        <span class="work-note">Concept projects, shown as examples</span>
       </div>
+      <ul class="work">
+        <li><div class="work-media w1" role="img" aria-label="Pearl holographic gradient"></div><div><h3>Lumen Health</h3><p>Health tech &middot; brand story and launch site</p></div></li>
+        <li><div class="work-media w2" role="img" aria-label="Iridescent liquid metal on dark"></div><div><h3>Norte Energ&iacute;a</h3><p>Renewable energy &middot; pitch deck and landing</p></div></li>
+        <li><div class="work-media w3" role="img" aria-label="Threads of light on dark"></div><div><h3>Ra&iacute;z Foods</h3><p>Food startup &middot; prototype and website</p></div></li>
+        <li><div class="work-media w4" role="img" aria-label="Ribbed glass over a soft orb"></div><div><h3>Campo Abierto</h3><p>Social impact &middot; funding narrative and site</p></div></li>
+        <li><div class="work-media w5" role="img" aria-label="Grid of pearl orbs"></div><div><h3>Semilla Labs</h3><p>AI startup &middot; product prototype</p></div></li>
+      </ul>
     </div>
   </section>
 

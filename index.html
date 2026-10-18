@@ -217,7 +217,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20
 
   // Smooth scroll, synced with ScrollTrigger
   if (window.Lenis) {
-    var lenis = new Lenis();
+    var lenis = new Lenis({ lerp: 0.08, wheelMultiplier: 0.8, touchMultiplier: 1 });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
     gsap.ticker.lagSmoothing(0);
@@ -244,16 +244,21 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20
     aim();
     var tl = gsap.timeline({
       scrollTrigger: {
-        trigger: '.portal', start: 'top top', end: '+=140%', pin: true, scrub: 1,
+        trigger: '.portal', start: 'top top', end: '+=240%', pin: true, scrub: 1.2,
+        snap: { snapTo: 'labels', duration: { min: 0.3, max: 0.8 }, delay: 0.15, ease: 'power2.inOut', inertia: false },
         onRefreshInit: aim,
-        onUpdate: function(self){ inScene = self.progress > 0.8; paintNav(); }
+        onUpdate: function(self){ inScene = self.progress > 0.46; paintNav(); }
       }
     });
-    tl.to('.intro-line', { opacity: 0, y: 16, duration: .12, ease: 'none' }, 0)
+    tl.addLabel('start', 0)
+      .to('.intro-line', { opacity: 0, y: 16, duration: .12, ease: 'none' }, 0)
       .to(mask, { scale: 70, duration: 1, ease: 'power3.in', force3D: false }, 0)
       .to(mask, { opacity: 0, duration: .12, ease: 'none' }, .82)
       .to('.stem', { scaleY: 1, duration: .6, ease: 'power2.out', stagger: { each: .004, from: 'random' } }, .4)
-      .to('.scene-copy > *', { opacity: 1, y: 0, duration: .22, stagger: .06, ease: 'power2.out' }, .86);
+      .to('.scene-copy > *', { opacity: 1, y: 0, duration: .22, stagger: .06, ease: 'power2.out' }, .86)
+      .addLabel('hero', 1.2)
+      .to({}, { duration: .7 }, 1.2)
+      .addLabel('end', 1.9);
 
     ScrollTrigger.create({
       trigger: '#services', start: 'top 72px',

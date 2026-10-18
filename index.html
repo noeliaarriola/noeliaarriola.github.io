@@ -54,6 +54,8 @@ img,svg{max-width:100%}
 .nav-cta{text-decoration:none;font-size:15px;font-weight:500;padding:12px 20px;border-radius:999px;background:var(--ink);color:var(--bg);transition:background .35s ease,color .35s ease}
 .nav.light{color:var(--bg)}
 .nav.light .nav-cta{background:var(--bg);color:var(--ink)}
+.nav-cta{transition:background .35s ease,color .35s ease,opacity .45s ease,transform .45s ease}
+.nav.hide-cta .nav-cta{opacity:0;transform:translateY(-6px);pointer-events:none}
 
 /* Portal */
 .portal{position:relative;height:100vh;height:100svh;overflow:hidden}
@@ -109,9 +111,9 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20
   .mail{margin-left:0}
 }
 @media (prefers-reduced-motion:no-preference){
-  .sway{animation:sway 7s ease-in-out infinite alternate}
+  .sway{animation:sway 4.6s ease-in-out infinite}
 }
-@keyframes sway{from{transform:rotate(-1.6deg)}to{transform:rotate(1.6deg)}}
+@keyframes sway{0%{transform:rotate(-4.5deg)}50%{transform:rotate(3deg)}100%{transform:rotate(-4.5deg)}}
 </style>
 </head>
 <body>
@@ -198,8 +200,9 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20
     var sway = document.createElement('div');
     sway.className = 'sway';
     sway.style.left = Math.min(99.6, Math.max(0, (i / (count - 1)) * 100 + (Math.random() - .5) * (100 / count))) + '%';
-    sway.style.animationDelay = (-Math.random() * 7) + 's';
-    sway.style.animationDuration = (5 + Math.random() * 4) + 's';
+    // a gust that travels across the garden, with a little randomness per stem
+    sway.style.animationDelay = (-(i / count) * 2.4 - Math.random() * 0.5) + 's';
+    sway.style.animationDuration = (4.2 + Math.random() * 0.9) + 's';
     var stem = document.createElement('div');
     stem.className = 'stem';
     stem.style.height = (18 + Math.pow(Math.random(), 1.6) * 82) + '%';
@@ -235,7 +238,8 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20
 
   var nav = document.getElementById('nav');
   var inScene = false, past = false;
-  function paintNav(){ nav.classList.toggle('light', inScene && !past); }
+  var hideCta = false;
+  function paintNav(){ nav.classList.toggle('light', inScene && !past); nav.classList.toggle('hide-cta', hideCta && !past); }
 
   gsap.set('.scene-copy > *', { opacity: 0, y: 40 });
   gsap.set('.stem', { scaleY: 0.04 });
@@ -247,7 +251,7 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20
         trigger: '.portal', start: 'top top', end: '+=240%', pin: true, scrub: 1.2,
         snap: { snapTo: 'labelsDirectional', duration: { min: 0.3, max: 0.8 }, delay: 0.15, ease: 'power2.inOut', inertia: false },
         onRefreshInit: aim,
-        onUpdate: function(self){ inScene = self.progress > 0.46; paintNav(); }
+        onUpdate: function(self){ inScene = self.progress > 0.46; hideCta = self.progress > 0.08; paintNav(); }
       }
     });
     tl.addLabel('start', 0)

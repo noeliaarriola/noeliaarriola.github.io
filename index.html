@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amena Lab — Design studio</title>
+<meta name="description" content="Amena Lab is a design studio for small beginnings. We design clear, calm websites and help businesses grow one step at a time.">
+<meta property="og:title" content="Amena Lab — Design studio">
+<meta property="og:description" content="Where small beginnings grow.">
+<meta property="og:url" content="https://amenastudio.com/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23000'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23B04A64'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF; --ink:#000000; --text:#2B2B2B; --muted:#5E5E5E; --line:#E4E4E4;
+  --accent:#B04A64; --accent-deep:#5A1D2F; --blend:screen;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --ink:#FFFFFF; --text:#DADADA; --muted:#A6A6A6; --line:#2A2A2A; --blend:multiply;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --ink:#FFFFFF; --text:#DADADA; --muted:#A6A6A6; --line:#2A2A2A; --blend:multiply;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Instrument Sans','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto !important}
+.lenis.lenis-stopped{overflow:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+img,svg{max-width:100%}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:calc(16px + env(safe-area-inset-top,0px)) clamp(20px,4vw,48px) 16px;color:var(--ink);transition:color .35s ease}
+.brand{display:flex;gap:10px;text-decoration:none;min-height:44px;align-items:center}
+.brand b{font-size:19px;font-weight:580;letter-spacing:-0.02em}
+.brand span{font-size:14px;opacity:.7}
+.nav-cta{text-decoration:none;font-size:15px;font-weight:500;padding:12px 20px;border-radius:999px;background:var(--ink);color:var(--bg);transition:background .35s ease,color .35s ease}
+.nav.light{color:#FFFFFF}
+.nav.light .nav-cta{background:#FFFFFF;color:var(--accent-deep)}
+
+/* Portal */
+.portal{position:relative;height:100vh;height:100svh;overflow:hidden}
+.scene{position:absolute;inset:0;background:linear-gradient(180deg,var(--accent) 0%,var(--accent-deep) 100%);overflow:hidden}
+.stems{position:absolute;left:0;right:0;bottom:0;height:70%}
+.sway{position:absolute;bottom:0;height:100%;width:2px;transform-origin:50% 100%}
+.stem{position:absolute;bottom:0;left:0;width:1.5px;background:rgba(255,255,255,.45);border-radius:2px;transform-origin:50% 100%}
+.stem i{position:absolute;top:-3px;left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:rgba(255,255,255,.85)}
+.scene-copy{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:24px;padding:0 clamp(20px,6vw,96px);color:#FFFFFF}
+.scene-copy h1{margin:0;font-size:clamp(44px,7.2vw,108px);font-weight:520;line-height:.98;letter-spacing:-0.035em;max-width:11ch}
+.scene-copy p{margin:0;font-size:clamp(17px,1.5vw,20px);line-height:1.55;max-width:36ch;color:rgba(255,255,255,.9)}
+.actions{display:flex;flex-wrap:wrap;gap:12px;padding-top:8px}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:0 26px;border-radius:999px;font-size:16px;font-weight:500;text-decoration:none}
+.btn-light{background:#FFFFFF;color:var(--accent-deep)}
+.btn-ghost{border:1px solid rgba(255,255,255,.8);color:#FFFFFF}
+
+.mask{position:absolute;inset:0;background:var(--bg);mix-blend-mode:var(--blend);display:flex;align-items:center;justify-content:center;pointer-events:none}
+.word{margin:0;font-size:clamp(96px,27vw,460px);font-weight:620;letter-spacing:-0.055em;line-height:.8;color:var(--ink);white-space:nowrap;padding-bottom:.08em}
+.probe{display:inline-block;width:0;height:0;vertical-align:middle}
+.intro-line{position:absolute;left:0;right:0;bottom:calc(32px + env(safe-area-inset-bottom,0px));display:flex;justify-content:space-between;gap:16px;
+  padding:0 clamp(20px,4vw,48px);font-size:15px;color:var(--muted);pointer-events:none}
+
+/* Static fallback (reduced motion or scripts unavailable) */
+html.static .mask,html.static .intro-line{display:none}
+
+/* Sections */
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+section.block{padding:clamp(88px,12vw,160px) 0}
+.block h2{margin:0 0 clamp(32px,5vw,64px);font-size:clamp(32px,4.4vw,58px);font-weight:520;letter-spacing:-0.03em;line-height:1.05;color:var(--ink);max-width:16ch}
+.svc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:baseline;padding:36px 0;border-top:1px solid var(--line)}
+.svc h3{margin:0;font-size:clamp(28px,3.2vw,44px);font-weight:500;letter-spacing:-0.025em;color:var(--ink)}
+.svc p{margin:0;font-size:17px;line-height:1.6;max-width:42ch}
+
+.case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:start}
+.case .name{font-size:clamp(56px,9vw,140px);font-weight:560;letter-spacing:-0.05em;line-height:.9;color:var(--ink);margin:0}
+.case p{margin:0 0 20px;font-size:19px;line-height:1.6;max-width:44ch}
+
+.contact h2{font-size:clamp(48px,8vw,128px);max-width:12ch;line-height:.95;letter-spacing:-0.045em}
+.contact p{font-size:19px;line-height:1.6;max-width:44ch;margin:0 0 32px}
+.btn-accent{background:var(--accent);color:#FFFFFF}
+.mail{display:inline-flex;align-items:center;min-height:48px;margin-left:20px;font-size:17px}
+
+footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20px,4vw,48px) calc(32px + env(safe-area-inset-bottom,0px));font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
+
+@media (max-width:760px){
+  .brand span{display:none}
+  .svc{grid-template-columns:minmax(0,1fr);gap:10px}
+  .case{grid-template-columns:minmax(0,1fr)}
+  .intro-line span:first-child{max-width:60%}
+  .mail{margin-left:0}
+}
+@media (prefers-reduced-motion:no-preference){
+  .sway{animation:sway 7s ease-in-out infinite alternate}
+}
+@keyframes sway{from{transform:rotate(-1.6deg)}to{transform:rotate(1.6deg)}}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top"><b>amena lab</b><span>design studio</span></a>
+  <a class="nav-cta" href="#contact">Book a free call</a>
+</header>
+
+<main id="top">
+  <section class="portal" aria-label="Introduction">
+    <div class="scene">
+      <div class="stems" aria-hidden="true"></div>
+      <div class="scene-copy">
+        <h1>Where small beginnings grow.</h1>
+        <p>We design clear, calm websites for service businesses, and help them grow one step at a time.</p>
+        <div class="actions">
+          <a class="btn btn-light" href="#contact">Book a free call</a>
+          <a class="btn btn-ghost" href="#services">See how we help</a>
+        </div>
+      </div>
+    </div>
+    <div class="mask" aria-hidden="true">
+      <div class="word">ame<span class="n">n</span><span class="probe"></span>a</div>
+    </div>
+    <div class="intro-line" aria-hidden="true">
+      <span>UX and web design for service businesses</span>
+      <span>Scroll to enter</span>
+    </div>
+  </section>
+
+  <section class="block" id="services">
+    <div class="wrap">
+      <h2>Three ways to start</h2>
+      <article class="svc">
+        <h3>Get online</h3>
+        <p>A clear website and Google Business Profile, so new clients can find you and trust what they see.</p>
+      </article>
+      <article class="svc">
+        <h3>Fix what's not working</h3>
+        <p>A UX review of your current site, with the ten changes that matter most. Then we make them happen.</p>
+      </article>
+      <article class="svc">
+        <h3>Keep growing</h3>
+        <p>Monthly care and improvements, with a simple report of the contacts your website brings in.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="block" aria-labelledby="case-title">
+    <div class="wrap case">
+      <h2 class="name" id="case-title">Powersis</h2>
+      <div>
+        <p>Powersis began as one engineer working on his own. We led the research, the UX and the website.</p>
+        <p>Today the company has a team and works with large clients, including Light.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block contact" id="contact">
+    <div class="wrap">
+      <h2>Let's plant something.</h2>
+      <p>Tell us about your business. The first call is free, and you'll leave with at least one clear next step.</p>
+      <a class="btn btn-accent" href="mailto:hello@noela.dev?subject=Amena%20Lab%20%E2%80%94%20Free%20call">Book a free call</a>
+      <a class="mail" href="mailto:hello@noela.dev">hello@noela.dev</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Amena Lab, design studio</span>
+  <span>© 2026</span>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script>
+(function(){
+  // Grow the garden: thin stems, some with a bud on top
+  var stems = document.querySelector('.stems');
+  var count = window.innerWidth < 700 ? 46 : 110;
+  for (var i = 0; i < count; i++) {
+    var sway = document.createElement('div');
+    sway.className = 'sway';
+    sway.style.left = Math.min(99.6, Math.max(0, (i / (count - 1)) * 100 + (Math.random() - .5) * (100 / count))) + '%';
+    sway.style.animationDelay = (-Math.random() * 7) + 's';
+    sway.style.animationDuration = (5 + Math.random() * 4) + 's';
+    var stem = document.createElement('div');
+    stem.className = 'stem';
+    stem.style.height = (18 + Math.pow(Math.random(), 1.6) * 82) + '%';
+    if (Math.random() < .45) stem.appendChild(document.createElement('i'));
+    sway.appendChild(stem);
+    stems.appendChild(sway);
+  }
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !window.gsap || !window.ScrollTrigger) {
+    document.documentElement.classList.add('static');
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Smooth scroll, synced with ScrollTrigger
+  if (window.Lenis) {
+    var lenis = new Lenis();
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  // Aim the zoom at the left stem of the "n", so we fly through the letter
+  var mask = document.querySelector('.mask');
+  var n = document.querySelector('.word .n');
+  var probe = document.querySelector('.word .probe');
+  function aim(){
+    var ox = n.offsetLeft + n.offsetWidth * 0.19;
+    var oy = probe.offsetTop;
+    gsap.set(mask, { transformOrigin: ox + 'px ' + oy + 'px' });
+  }
+
+  var nav = document.getElementById('nav');
+  var inScene = false, past = false;
+  function paintNav(){ nav.classList.toggle('light', inScene && !past); }
+
+  gsap.set('.scene-copy > *', { opacity: 0, y: 40 });
+  gsap.set('.stem', { scaleY: 0.04 });
+
+  function build(){
+    aim();
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.portal', start: 'top top', end: '+=220%', pin: true, scrub: 1,
+        onRefreshInit: aim,
+        onUpdate: function(self){ inScene = self.progress > 0.8; paintNav(); }
+      }
+    });
+    tl.to('.intro-line', { opacity: 0, y: 16, duration: .12, ease: 'none' }, 0)
+      .to(mask, { scale: 70, duration: 1, ease: 'power3.in', force3D: false }, 0)
+      .to(mask, { opacity: 0, duration: .12, ease: 'none' }, .82)
+      .to('.stem', { scaleY: 1, duration: .6, ease: 'power2.out', stagger: { each: .004, from: 'random' } }, .4)
+      .to('.scene-copy > *', { opacity: 1, y: 0, duration: .22, stagger: .06, ease: 'power2.out' }, .86);
+
+    ScrollTrigger.create({
+      trigger: '#services', start: 'top 72px',
+      onEnter: function(){ past = true; paintNav(); },
+      onLeaveBack: function(){ past = false; paintNav(); }
+    });
+  }
+
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(build); } else { build(); }
+})();
+</script>
+</body>
+</html>

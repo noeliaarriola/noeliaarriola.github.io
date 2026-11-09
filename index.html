@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Amena Lab — Design studio</title>
-<meta name="description" content="Amena Lab is a design studio for small beginnings. We design clear, calm websites and help businesses grow one step at a time.">
-<meta property="og:title" content="Amena Lab — Design studio">
-<meta property="og:description" content="Where small beginnings grow.">
+<title>Amena Studio — Demand generation for B2B SaaS</title>
+<meta name="description" content="Amena Studio helps post-PMF B2B SaaS companies reach the right buyers, create real demand, and turn it into qualified sales meetings every month.">
+<meta property="og:title" content="Amena Studio — Build a more consistent pipeline">
+<meta property="og:description" content="Demand generation for post-PMF B2B SaaS in the US, UK and Europe.">
 <meta property="og:url" content="https://amenastudio.com/">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#FFFFFF">
@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&display=swap">
 <style>
 :root{
-  --bg:#FFFFFF; --ink:#000000; --text:#2B2B2B; --muted:#5E5E5E; --line:#E4E4E4;
+  --bg:#FFFFFF; --ink:#000000; --text:#2B2B2B; --muted:#5E5E5E; --line:#E4E4E4; --surface:#F4F4F5;
   --stem:rgba(255,255,255,.5); --bud:#FFFFFF; --blend:screen;
   color-scheme:light;
   box-sizing:border-box;
@@ -25,17 +25,17 @@
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --bg:#000000; --ink:#FFFFFF; --text:#DADADA; --muted:#A6A6A6; --line:#2A2A2A; --blend:multiply;
+    --bg:#000000; --ink:#FFFFFF; --text:#DADADA; --muted:#A6A6A6; --line:#2A2A2A; --surface:#0E0E0F; --blend:multiply;
     --stem:rgba(0,0,0,.45); --bud:#000000;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --bg:#000000; --ink:#FFFFFF; --text:#DADADA; --muted:#A6A6A6; --line:#2A2A2A; --blend:multiply;
+  --bg:#000000; --ink:#FFFFFF; --text:#DADADA; --muted:#A6A6A6; --line:#2A2A2A; --surface:#0E0E0F; --blend:multiply;
   --stem:rgba(0,0,0,.45); --bud:#000000;
   color-scheme:dark;
 }
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html{scroll-padding-top:calc(80px + env(safe-area-inset-top,0px))}
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:'Instrument Sans','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 html.lenis,html.lenis body{height:auto}
@@ -47,26 +47,33 @@ img,svg{max-width:100%}
 
 /* Nav */
 .nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;gap:16px;
-  padding:calc(16px + env(safe-area-inset-top,0px)) clamp(20px,4vw,48px) 16px;color:var(--ink);transition:color .35s ease}
+  padding:calc(16px + env(safe-area-inset-top,0px)) clamp(20px,4vw,48px) 16px;color:var(--ink);transition:color .35s ease,background .35s ease}
+.nav.solid{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .brand{display:flex;gap:10px;text-decoration:none;min-height:44px;align-items:center}
 .brand b{font-size:19px;font-weight:580;letter-spacing:-0.02em}
 .brand span{font-size:14px;opacity:.7}
-.nav-cta{text-decoration:none;font-size:15px;font-weight:500;padding:12px 20px;border-radius:999px;background:var(--ink);color:var(--bg);transition:background .35s ease,color .35s ease}
+.nav-right{display:flex;align-items:center;gap:clamp(12px,2vw,28px)}
+.nav-links{display:flex;gap:clamp(12px,2vw,24px);font-size:15px;transition:opacity .45s ease}
+.nav-links a{text-decoration:none;opacity:.8}
+.nav-links a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+.nav-cta{text-decoration:none;font-size:15px;font-weight:500;padding:12px 20px;border-radius:999px;background:var(--ink);color:var(--bg);transition:background .35s ease,color .35s ease,opacity .45s ease,transform .45s ease}
 .nav.light{color:var(--bg)}
 .nav.light .nav-cta{background:var(--bg);color:var(--ink)}
-.nav-cta{transition:background .35s ease,color .35s ease,opacity .45s ease,transform .45s ease}
-.nav.hide-cta .nav-cta{opacity:0;transform:translateY(-6px);pointer-events:none}
+.nav.hide-cta .nav-cta,.nav.hide-cta .nav-links{opacity:0;transform:translateY(-6px);pointer-events:none}
 
-/* Portal */
+/* Portal — entrance animation (zoom through the "n") */
 .portal{position:relative;height:100vh;height:100svh;overflow:hidden}
 .scene{position:absolute;inset:0;background:var(--ink);overflow:hidden}
 .stems{position:absolute;left:0;right:0;bottom:0;height:70%}
 .sway{position:absolute;bottom:0;height:100%;width:2px;transform-origin:50% 100%}
 .stem{position:absolute;bottom:0;left:0;width:1.5px;background:var(--stem);border-radius:2px;transform-origin:50% 100%}
 .stem i{position:absolute;top:-3px;left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:var(--bud)}
+.stem i::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--bud);opacity:0}
 .scene-copy{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:24px;padding:0 clamp(20px,6vw,96px);color:var(--bg)}
-.scene-copy h1{margin:0;font-size:clamp(44px,7.2vw,108px);font-weight:520;line-height:.98;letter-spacing:-0.035em;max-width:11ch}
-.scene-copy p{margin:0;font-size:clamp(17px,1.5vw,20px);line-height:1.55;max-width:36ch;color:var(--bg);opacity:.85}
+.scene-copy .kicker{display:flex;flex-wrap:wrap;gap:8px}
+.scene-copy .kicker span{font-size:13px;padding:5px 12px;border:1px solid color-mix(in srgb,var(--bg) 45%,transparent);border-radius:999px;opacity:.9}
+.scene-copy h1{margin:0;font-size:clamp(44px,7.2vw,108px);font-weight:520;line-height:.98;letter-spacing:-0.035em;max-width:12ch}
+.scene-copy p{margin:0;font-size:clamp(17px,1.5vw,20px);line-height:1.55;max-width:44ch;color:var(--bg);opacity:.85}
 .actions{display:flex;flex-wrap:wrap;gap:12px;padding-top:8px}
 .btn{display:inline-flex;align-items:center;min-height:48px;padding:0 26px;border-radius:999px;font-size:16px;font-weight:500;text-decoration:none}
 .btn-light{background:var(--bg);color:var(--ink)}
@@ -85,52 +92,139 @@ html.static .mask,html.static .intro-line{display:none}
 /* Sections */
 .wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
 section.block{padding:clamp(88px,12vw,160px) 0}
-.block h2{margin:0 0 clamp(32px,5vw,64px);font-size:clamp(32px,4.4vw,58px);font-weight:520;letter-spacing:-0.03em;line-height:1.05;color:var(--ink);max-width:16ch}
-.svc{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(16px,3vw,40px);align-items:baseline;padding:36px 0;border-top:1px solid var(--line)}
-.svc h3{margin:0;font-size:clamp(28px,3.2vw,44px);font-weight:500;letter-spacing:-0.025em;color:var(--ink)}
-.svc p{margin:0;font-size:17px;line-height:1.6;max-width:42ch}
+section.tint{background:var(--surface)}
+.marker{display:flex;flex-direction:column;gap:14px;padding-top:20px;border-top:1px solid var(--line);margin-bottom:clamp(24px,3vw,36px)}
+.marker .idx{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.marker .mt{font-size:clamp(44px,6.6vw,100px);font-weight:520;letter-spacing:-0.045em;line-height:.95;color:var(--ink)}
+.block h2{margin:0 0 clamp(16px,2vw,22px);font-size:clamp(24px,2.8vw,38px);font-weight:500;letter-spacing:-0.025em;line-height:1.15;color:var(--ink);max-width:28ch}
+.lede{margin:0 0 clamp(40px,5vw,64px);font-size:clamp(17px,1.4vw,19px);line-height:1.6;max-width:56ch}
 
-.work-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:clamp(32px,5vw,56px)}
-.work-head h2{margin:0}
-.work-note{font-size:14px;color:var(--muted)}
-.work-stage{background:#100F14;border-radius:20px;overflow:hidden;display:flex;justify-content:center}
-.work-stage video{display:block;width:100%;max-width:720px;aspect-ratio:1/1;height:auto;background:#100F14}
-.work{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,1.6vw,24px);list-style:none;margin:clamp(24px,3vw,36px) 0 0;padding:0}
-.work li{border-top:1px solid var(--line);padding-top:14px}
-.work .num{display:block;font-size:13px;color:var(--muted);margin-bottom:6px;font-variant-numeric:tabular-nums}
-.work h3{margin:0;font-size:17px;font-weight:500;letter-spacing:-0.01em;color:var(--ink)}
-.work p{margin:4px 0 0;font-size:14px;line-height:1.45;color:var(--muted)}
-.contact h2{font-size:clamp(48px,8vw,128px);max-width:12ch;line-height:.95;letter-spacing:-0.045em}
-.contact p{font-size:19px;line-height:1.6;max-width:44ch;margin:0 0 32px}
+/* Problem */
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,1.6vw,20px)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:clamp(24px,2.6vw,36px)}
+.tint .card{background:var(--bg)}
+.card h3{margin:0 0 10px;font-size:22px;font-weight:520;letter-spacing:-0.02em;color:var(--ink)}
+.card p{margin:0;font-size:16px;line-height:1.6}
+.stats-title{margin:clamp(48px,6vw,80px) 0 0;font-size:15px;font-weight:500;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,40px);margin-top:16px;padding-top:clamp(28px,3vw,40px);border-top:1px solid var(--line)}
+.stat b{display:block;font-size:clamp(44px,5vw,72px);font-weight:520;letter-spacing:-0.04em;line-height:1;color:var(--ink);margin-bottom:12px}
+.stat p{margin:0;font-size:15px;line-height:1.5;max-width:32ch}
+.stat small{display:block;margin-top:8px;font-size:12px;color:var(--muted)}
+
+/* Engine */
+.module{display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,1.1fr);gap:clamp(16px,3vw,40px);align-items:baseline;padding:36px 0;border-top:1px solid var(--line)}
+.module .num{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.module h3{margin:0;font-size:clamp(26px,3vw,40px);font-weight:500;letter-spacing:-0.025em;color:var(--ink)}
+.module p{margin:0 0 14px;font-size:17px;line-height:1.6;max-width:46ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:0;padding:0}
+.tags li{font-size:13px;padding:4px 12px;border:1px solid var(--line);border-radius:999px;color:var(--text)}
+.note{margin-top:28px;padding:24px 28px;border:1px dashed var(--line);border-radius:20px;font-size:16px;line-height:1.6;max-width:820px}
+.note strong{color:var(--ink);font-weight:560}
+
+/* Timeline */
+.timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.6vw,20px);list-style:none;margin:0;padding:0;counter-reset:t}
+.timeline li{position:relative;padding-top:28px;border-top:1px solid var(--ink)}
+.timeline li::before{content:"";position:absolute;top:-5px;left:0;width:9px;height:9px;border-radius:50%;background:var(--ink)}
+.timeline .days{display:block;font-size:13px;color:var(--muted);margin-bottom:10px;font-variant-numeric:tabular-nums}
+.timeline h3{margin:0 0 10px;font-size:21px;font-weight:520;letter-spacing:-0.02em;color:var(--ink);line-height:1.2}
+.timeline p{margin:0;font-size:15px;line-height:1.6}
+
+/* Comparison */
+.compare{width:100%;border-collapse:collapse;font-size:16px;line-height:1.5}
+.compare th,.compare td{text-align:left;padding:18px 16px 18px 0;border-top:1px solid var(--line);vertical-align:top}
+.compare thead th{font-size:13px;font-weight:500;color:var(--muted);border-top:0;padding-bottom:12px}
+.compare tbody th{font-weight:500;color:var(--ink);width:24%}
+.compare td:last-child{color:var(--ink)}
+.metrics{margin-top:clamp(40px,5vw,56px)}
+.metrics h3{margin:0 0 14px;font-size:15px;font-weight:500;color:var(--muted)}
+
+/* Engagements */
+.plans{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:clamp(12px,1.6vw,20px);align-items:stretch}
+.plan{display:flex;flex-direction:column;gap:16px;border:1px solid var(--line);border-radius:32px;padding:clamp(28px,3vw,40px);background:var(--bg)}
+.plan.main{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.plan .label{font-size:13px;opacity:.7}
+.plan h3{margin:0;font-size:clamp(24px,2.4vw,30px);font-weight:520;letter-spacing:-0.02em;line-height:1.15;color:inherit}
+.plan.main h3{color:var(--bg)}
+.plan:not(.main) h3{color:var(--ink)}
+.plan .price{font-size:17px;font-weight:500}
+.plan ul{margin:0;padding:0 0 0 18px;font-size:15px;line-height:1.65}
+.plan .btn{margin-top:auto;align-self:flex-start}
+.plan.main .btn{background:var(--bg);color:var(--ink)}
+.plan:not(.main) .btn{border:1px solid var(--ink);color:var(--ink)}
+.fine{margin:20px 0 0;font-size:13px;color:var(--muted);max-width:80ch;line-height:1.55}
+
+/* Fit */
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,20px)}
+.fit h3{margin:0 0 16px;font-size:22px;font-weight:520;letter-spacing:-0.02em;color:var(--ink)}
+.fit ul{margin:0;padding:0;list-style:none}
+.fit li{padding:12px 0 12px 28px;border-top:1px solid var(--line);font-size:16px;line-height:1.5;position:relative}
+.fit li::before{position:absolute;left:0;top:12px;color:var(--ink)}
+.fit .yes li::before{content:"+"}
+.fit .no li::before{content:"–"}
+
+/* FAQ */
+.faq{max-width:880px}
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:24px;padding:24px 0;font-size:clamp(18px,1.6vw,21px);font-weight:500;letter-spacing:-0.015em;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:400;transition:transform .3s ease}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin:0 0 24px;font-size:16px;line-height:1.65;max-width:66ch}
+
+/* Contact */
+.contact h2{text-wrap:balance;font-size:clamp(44px,7vw,112px);max-width:16ch;line-height:.95;letter-spacing:-0.045em}
+.contact p{font-size:19px;line-height:1.6;max-width:48ch;margin:0 0 32px}
+.pilot{display:inline-flex;align-items:center;gap:8px;font-size:14px;padding:6px 14px;border:1px solid var(--ink);border-radius:999px;color:var(--ink);margin-bottom:28px}
+.pilot::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--ink)}
 .btn-accent{background:var(--ink);color:var(--bg)}
-.mail{display:inline-flex;align-items:center;min-height:48px;margin-left:20px;font-size:17px}
+.mail{display:inline-flex;align-items:center;min-height:48px;font-size:17px}
+.contact .wrap > div:last-child{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
 
-footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20px,4vw,48px) calc(32px + env(safe-area-inset-bottom,0px));font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:32px clamp(20px,4vw,48px) calc(32px + env(safe-area-inset-bottom,0px));font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
 
-@media (max-width:1100px) and (min-width:761px){
-  .work{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1100px){
+  .nav-links{display:none}
+  .timeline{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:40px}
+  .plans{grid-template-columns:minmax(0,1fr)}
 }
 @media (max-width:760px){
   .brand span{display:none}
   .stems{height:34%}
   .scene-copy{justify-content:flex-start;padding-top:calc(96px + env(safe-area-inset-top,0px));gap:20px}
-  .svc{grid-template-columns:minmax(0,1fr);gap:10px}
-  .work{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .work-stage{border-radius:14px}
+  .cards,.stats,.fit{grid-template-columns:minmax(0,1fr)}
+  .module{grid-template-columns:minmax(0,1fr);gap:10px}
+  .timeline{grid-template-columns:minmax(0,1fr)}
+  .compare thead{display:none}
+  .compare tr{display:block;border-top:1px solid var(--line);padding:16px 0}
+  .compare th,.compare td{display:block;border:0;padding:4px 0;width:auto}
+  .compare tbody th{width:auto}
+  .compare td::before{content:attr(data-h);display:block;font-size:12px;color:var(--muted)}
   .intro-line span:first-child{max-width:60%}
-  .mail{margin-left:0}
 }
 @media (prefers-reduced-motion:no-preference){
   .sway{animation:sway 4.6s ease-in-out infinite}
 }
+@media (prefers-reduced-motion:no-preference){
+  .stem i::after{animation:ping 6s ease-out infinite;animation-delay:var(--d,0s)}
+}
+@keyframes ping{0%{opacity:.9;transform:scale(.5)}10%{opacity:0;transform:scale(2.8)}100%{opacity:0;transform:scale(2.8)}}
 @keyframes sway{0%{transform:rotate(-4.5deg)}50%{transform:rotate(3deg)}100%{transform:rotate(-4.5deg)}}
 </style>
 </head>
 <body>
 
 <header class="nav" id="nav">
-  <a class="brand" href="#top"><b>amena lab</b><span>design studio</span></a>
-  <a class="nav-cta" href="#contact">Book a free call</a>
+  <a class="brand" href="#top"><b>amena studio</b></a>
+  <div class="nav-right">
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#engine">How it works</a>
+      <a href="#90-days">First 90 days</a>
+      <a href="#engagements">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Book a call</a>
+  </div>
 </header>
 
 <main id="top">
@@ -138,11 +232,11 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20
     <div class="scene">
       <div class="stems" aria-hidden="true"></div>
       <div class="scene-copy">
-        <h1>Where small beginnings grow.</h1>
-        <p>We design clear, calm websites for founders and small businesses, and help them grow one step at a time.</p>
+        <h1>Build a more consistent pipeline.</h1>
+        <p>We build the outbound, content and conversion system that turns your ICP into qualified sales meetings, so new deals stop depending on the founder's network.</p>
         <div class="actions">
-          <a class="btn btn-light" href="#contact">Book a free call</a>
-          <a class="btn btn-ghost" href="#services">See how we help</a>
+          <a class="btn btn-light" href="#contact">Book a call</a>
+          <a class="btn btn-ghost" href="#engine">See how it works</a>
         </div>
       </div>
     </div>
@@ -150,62 +244,268 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20
       <div class="word">ame<span class="n">n</span><span class="probe"></span>a</div>
     </div>
     <div class="intro-line" aria-hidden="true">
-      <span><strong>Where small beginnings grow.</strong>Amena Lab, design studio</span>
+      <span><strong>From demand to pipeline.</strong>Amena Studio, growth for B2B SaaS</span>
       <span>Scroll to enter</span>
     </div>
   </section>
 
-  <section class="block" id="services">
+  <section class="block" id="problem" aria-labelledby="problem-title">
     <div class="wrap">
-      <h2>Three ways to start</h2>
-      <article class="svc">
-        <h3>Get online</h3>
-        <p>A clear website and Google Business Profile, so new clients can find you and trust what they see.</p>
-      </article>
-      <article class="svc">
-        <h3>Fix what's not working</h3>
-        <p>A UX review of your current site, with the ten changes that matter most. Then we make them happen.</p>
-      </article>
-      <article class="svc">
-        <h3>Keep growing</h3>
-        <p>Monthly care and improvements, with a simple report of the contacts your website brings in.</p>
-      </article>
+      <div class="marker reveal"><span class="idx">01 / 06</span><span class="mt">Sound familiar?</span></div>
+      <h2 id="problem-title" class="reveal">You have customers. You don't yet have a pipeline you can count on.</h2>
+      <p class="lede reveal">You've proven people will pay. Now growth has to stop depending on luck, referrals and your calendar.</p>
+      <div class="cards">
+        <article class="card reveal">
+          <h3>Every deal still needs you</h3>
+          <p>You run most first calls, write the follow-ups and close. If you step away for two weeks, new opportunities stop.</p>
+        </article>
+        <article class="card reveal">
+          <h3>Growth by referral</h3>
+          <p>Ask where your last ten customers came from. If most answers are intros and your own network, next quarter is a guess.</p>
+        </article>
+        <article class="card reveal">
+          <h3>Lots of channels, no system</h3>
+          <p>Founder posts on LinkedIn, a few outbound sequences, some SEO, a paid test. Nobody owns the numbers, so nobody knows where to double down.</p>
+        </article>
+      </div>
+      <p class="stats-title reveal">You're not the only one.</p>
+      <div class="stats">
+        <div class="stat reveal">
+          <b>75%</b>
+          <p>of B2B marketing and GTM leaders say generating more pipeline is a core priority for 2026.</p>
+          <small>DemandWorks, State of B2B Demand Generation 2026</small>
+        </div>
+        <div class="stat reveal">
+          <b>26%</b>
+          <p>of companies between $1M and $10M ARR still run founder-led sales as their main motion.</p>
+          <small>State of B2B GTM 2026, 300 companies</small>
+        </div>
+        <div class="stat reveal">
+          <b>+14%</b>
+          <p>higher cost to win a new customer (new CAC ratio) in 2024.</p>
+          <small>Benchmarkit, 2025 SaaS Performance Metrics</small>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="block" id="work" aria-labelledby="work-title">
+  <section class="block tint" id="engine" aria-labelledby="engine-title">
     <div class="wrap">
-      <div class="work-head">
-        <h2 id="work-title">Selected work</h2>
-        <span class="work-note">Concept projects, shown as examples</span>
+      <div class="marker reveal"><span class="idx">02 / 06</span><span class="mt">How it works</span></div>
+      <h2 id="engine-title" class="reveal">One system, from first touch to sales meeting.</h2>
+      <p class="lede reveal">Not a lead-gen package and not a CRM audit. Four pieces of work, each with something you can see and use.</p>
+
+      <article class="module reveal">
+        <span class="num">01</span>
+        <h3>Find the right buyers</h3>
+        <div>
+          <p>We talk to your customers and review closed-won and closed-lost deals to learn who buys and why now. You get an ICP with buying triggers, messaging by persona, and a definition of "qualified" that sales signs off on.</p>
+          <ul class="tags"><li>ICP and triggers</li><li>Win/loss review</li><li>Persona messaging</li><li>SAO criteria</li><li>Channel plan</li></ul>
+        </div>
+      </article>
+      <article class="module reveal">
+        <span class="num">02</span>
+        <h3>Reach them where they are</h3>
+        <div>
+          <p>We pick one main channel based on your ACV, sales cycle and budget, and build it end to end: account lists, outbound sequences, trigger-based content, or search and paid campaigns. One channel working before we add a second.</p>
+          <ul class="tags"><li>Account lists</li><li>Outbound sequences</li><li>Trigger-based content</li><li>Search &amp; paid</li><li>Partner intros</li></ul>
+        </div>
+      </article>
+      <article class="module reveal">
+        <span class="num">03</span>
+        <h3>Turn interest into meetings</h3>
+        <div>
+          <p>We fix where demand leaks: demo requests that wait a day for a reply, landing pages that don't convert, and leads that get no follow-up because they weren't ready yet.</p>
+          <ul class="tags"><li>Demo-request flow</li><li>Speed-to-lead</li><li>Lead routing</li><li>Nurture</li><li>Sales one-pagers</li></ul>
+        </div>
+      </article>
+      <article class="module reveal">
+        <span class="num">+</span>
+        <h3>Measure what moves</h3>
+        <div>
+          <p>Tracking from first touch to closed-won in your CRM, a one-page weekly report, and a short weekly review with sales to decide what to test next.</p>
+          <ul class="tags"><li>CRM tracking</li><li>Weekly report</li><li>Experiment log</li><li>Sales feedback loop</li></ul>
+        </div>
+      </article>
+
+      <div class="note reveal"><strong>Quick wins from what you already have.</strong> While the new channel is being built, we review open opportunities, stalled proposals and recent closed-lost deals. If some are worth reopening, we run a focused campaign. It never replaces or delays new acquisition.</div>
+    </div>
+  </section>
+
+  <section class="block" id="90-days" aria-labelledby="days-title">
+    <div class="wrap">
+      <div class="marker reveal"><span class="idx">03 / 06</span><span class="mt">The first 90 days</span></div>
+      <h2 id="days-title" class="reveal">Two weeks to diagnose. Then we ship.</h2>
+      <p class="lede reveal">No months of strategy decks. Your first acquisition channel goes live in month one.</p>
+      <ol class="timeline">
+        <li class="reveal">
+          <span class="days">Days 1–15</span>
+          <h3>Find the fastest route</h3>
+          <p>Customer and win/loss interviews, ICP and messaging, a funnel baseline (lead-to-meeting, meeting-to-SAO, win rate) and a list of stalled deals worth reopening.</p>
+        </li>
+        <li class="reveal">
+          <span class="days">Days 16–30</span>
+          <h3>First channel live</h3>
+          <p>First sequences or campaigns launched, demo-request flow and landing page fixed, tracking live in your CRM.</p>
+        </li>
+        <li class="reveal">
+          <span class="days">Days 31–60</span>
+          <h3>Generate and qualify</h3>
+          <p>Weekly message and audience tests, opportunities handed to sales with context, and we cut what isn't working.</p>
+        </li>
+        <li class="reveal">
+          <span class="days">Days 61–90</span>
+          <h3>Make it consistent</h3>
+          <p>Conversion by stage, a written playbook your team can run, and a clear call: scale the channel, add a second one, or hire.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block tint" id="difference" aria-labelledby="diff-title">
+    <div class="wrap">
+      <div class="marker reveal"><span class="idx">04 / 06</span><span class="mt">Why Amena</span></div>
+      <h2 id="diff-title" class="reveal">We measure pipeline, not activity.</h2>
+      <table class="compare reveal">
+        <thead><tr><th scope="col"></th><th scope="col">Typical agency</th><th scope="col">Amena Studio</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">What counts as success</th><td data-h="Typical agency">Leads, clicks, MQLs</td><td data-h="Amena Studio">Sales-accepted opportunities and the revenue behind them</td></tr>
+          <tr><th scope="row">Channels</th><td data-h="Typical agency">A bit of everything</td><td data-h="Amena Studio">One or two, chosen on evidence and tested with discipline</td></tr>
+          <tr><th scope="row">Where we look</th><td data-h="Typical agency">New demand only</td><td data-h="Amena Studio">The whole system: new demand, existing demand, conversion and your customer base</td></tr>
+          <tr><th scope="row">Getting started</th><td data-h="Typical agency">Months of strategy decks</td><td data-h="Amena Studio">Two weeks of diagnosis, then execution</td></tr>
+          <tr><th scope="row">Who you work with</th><td data-h="Typical agency">An account manager</td><td data-h="Amena Studio">The founders who run your account</td></tr>
+          <tr><th scope="row">Message</th><td data-h="Typical agency">Generic SaaS copy</td><td data-h="Amena Studio">Clear explanations of technical products for complex B2B buying</td></tr>
+        </tbody>
+      </table>
+      <div class="metrics reveal">
+        <h3>What we report on</h3>
+        <ul class="tags"><li>SAOs</li><li>Qualified meetings</li><li>Pipeline created ($)</li><li>Stage conversion</li><li>Cost per SAO</li><li>Speed-to-lead</li><li>Time to first opportunity</li><li>Win rate</li></ul>
       </div>
-      <div class="work-stage">
-        <video id="work-video" autoplay muted loop playsinline preload="metadata" poster="media/amena-cover-flow-poster.jpg" aria-label="Five concept projects rotating in a cover flow">
-          <source src="media/amena-cover-flow.mp4" type="video/mp4">
-        </video>
+    </div>
+  </section>
+
+  <section class="block" id="engagements" aria-labelledby="eng-title">
+    <div class="wrap">
+      <div class="marker reveal"><span class="idx">05 / 06</span><span class="mt">Pricing</span></div>
+      <h2 id="eng-title" class="reveal">Clear scope. Public pricing.</h2>
+      <p class="lede reveal">Built for post-PMF B2B SaaS, usually between $1M and $5M ARR, selling in English.</p>
+      <div class="plans">
+        <article class="plan main reveal">
+          <span class="label">Core · 90 days</span>
+          <h3>90-Day Pipeline Build</h3>
+          <span class="price">From $5,000 / month · 3 months</span>
+          <ul>
+            <li>ICP, messaging and SAO criteria</li>
+            <li>One acquisition channel live by day 30</li>
+            <li>Landing page, demo flow and follow-up fixed</li>
+            <li>CRM tracking and a weekly report</li>
+            <li>A written playbook at day 90</li>
+          </ul>
+          <a class="btn" href="#contact">Book a call</a>
+        </article>
+        <article class="plan reveal">
+          <span class="label">After the build</span>
+          <h3>Growth Partner</h3>
+          <span class="price">From $4,000 / month</span>
+          <ul>
+            <li>Weekly tests and reporting</li>
+            <li>Opportunity reviews with sales</li>
+            <li>New channels and specialists, managed by us</li>
+          </ul>
+          <a class="btn" href="#contact">Ask about it</a>
+        </article>
+        <article class="plan reveal">
+          <span class="label">Not ready yet?</span>
+          <h3>Growth Assessment</h3>
+          <span class="price">Fixed scope, fixed fee</span>
+          <ul>
+            <li>Funnel and channel review</li>
+            <li>Where your next opportunities will come from</li>
+            <li>A prioritized 90-day plan your team can run</li>
+          </ul>
+          <a class="btn" href="#contact">Ask about it</a>
+        </article>
       </div>
-      <ul class="work">
-        <li><span class="num">01</span><h3>Lumen Health</h3><p>Health tech &middot; brand story and launch site</p></li>
-        <li><span class="num">02</span><h3>Norte Energ&iacute;a</h3><p>Renewable energy &middot; pitch deck and landing</p></li>
-        <li><span class="num">03</span><h3>Ra&iacute;z Foods</h3><p>Food startup &middot; prototype and website</p></li>
-        <li><span class="num">04</span><h3>Campo Abierto</h3><p>Social impact &middot; funding narrative and site</p></li>
-        <li><span class="num">05</span><h3>Semilla Labs</h3><p>AI startup &middot; product prototype</p></li>
-      </ul>
+      <p class="fine">Paid media, software, data enrichment and complex technical builds are budgeted separately. We don't promise a fixed number of leads or revenue. We commit to the scope, the work and honest reporting.</p>
+
+      <div class="fit" style="margin-top:clamp(56px,7vw,96px)">
+        <div class="yes reveal">
+          <h3>A good fit</h3>
+          <ul>
+            <li>B2B SaaS with paying customers and a validated offer</li>
+            <li>Consultative or sales-assisted deals</li>
+            <li>Selling in the US, UK or Europe</li>
+            <li>Someone on your side who can follow up on opportunities</li>
+          </ul>
+        </div>
+        <div class="no reveal">
+          <h3>Probably not yet</h3>
+          <ul>
+            <li>Pre-product-market fit</li>
+            <li>Low-ticket, self-serve-only products</li>
+            <li>No sales function at all</li>
+            <li>Looking for a guaranteed number of leads</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block tint" id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="marker reveal"><span class="idx">06 / 06</span><span class="mt">Frequently asked questions</span></div>
+      <h2 id="faq-title" class="reveal">What founders usually want to know before a first call.</h2>
+      <div class="faq reveal">
+        <details>
+          <summary>Are you a lead generation agency?</summary>
+          <p>No. Lead volume is easy to inflate. We build the system that turns the right buyers into opportunities your sales team accepts, and that's what we report on.</p>
+        </details>
+        <details>
+          <summary>Do you guarantee results?</summary>
+          <p>We don't guarantee a number of leads, opportunities or revenue. We commit to a clear scope, a live channel in the first month and honest weekly reporting on the numbers that matter.</p>
+        </details>
+        <details>
+          <summary>How fast will we see results?</summary>
+          <p>The first channel goes live by day 30. How fast it turns into meetings depends on your ACV, sales cycle and channel, so you see the numbers every week from the start instead of waiting for day 90.</p>
+        </details>
+        <details>
+          <summary>Which channels do you run?</summary>
+          <p>The one or two with the best evidence for your buyers and budget. Usually targeted outbound, content, partnerships, search or paid media. Picking fewer channels is part of the method.</p>
+        </details>
+        <details>
+          <summary>Who actually does the work?</summary>
+          <p>Amena Studio is a founder-led boutique. We own diagnosis, strategy, positioning, messaging and coordination, and bring in trusted specialists for CRM, media, web development, data and creative when the scope needs them.</p>
+        </details>
+        <details>
+          <summary>What do you need from us?</summary>
+          <p>Access to the relevant data and tools, a short weekly sync with whoever owns sales, and the capacity to follow up when opportunities arrive. Closing, product and pricing stay with you.</p>
+        </details>
+        <details>
+          <summary>Should we just hire someone in-house?</summary>
+          <p>Often, eventually. A 90-day build gives you a working channel, a playbook and real numbers first, so the person you hire inherits a system instead of a blank page.</p>
+        </details>
+        <details>
+          <summary>What happens after 90 days?</summary>
+          <p>You keep the playbook and assets. Then you decide: keep working with us, take it in-house, or pause. No long lock-in.</p>
+        </details>
+      </div>
     </div>
   </section>
 
   <section class="block contact" id="contact">
     <div class="wrap">
-      <h2>Let's plant something.</h2>
-      <p>Tell us about your business. The first call is free, and you'll leave with at least one clear next step.</p>
-      <a class="btn btn-accent" href="mailto:hello@noela.dev?subject=Amena%20Lab%20%E2%80%94%20Free%20call">Book a free call</a>
-      <a class="mail" href="mailto:hello@noela.dev">hello@noela.dev</a>
+      <h2 class="reveal">Let's find the customers your product was built for.</h2>
+      <p class="reveal">Bring three answers: where your last ten customers came from, how many qualified opportunities you need each month, and how many you get today. We'll look at the gap together, and you'll leave with at least one clear next step.</p>
+      <div class="reveal">
+        <a class="btn btn-accent" href="mailto:hello@amenastudio.com?subject=Intro%20call%20%E2%80%94%20Amena%20Studio">Book a call</a>
+        <a class="mail" href="mailto:hello@amenastudio.com">hello@amenastudio.com</a>
+      </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <span>Amena Lab, design studio</span>
+  <span>Amena Studio · Demand generation for B2B SaaS</span>
   <span>© 2026</span>
 </footer>
 
@@ -214,39 +514,56 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
 <script>
 (function(){
-  // Grow the garden: thin stems, some with a bud on top
+  // Rising stems behind the hero: signals that grow into a pipeline
   var stems = document.querySelector('.stems');
   var count = window.innerWidth < 700 ? 46 : 110;
   for (var i = 0; i < count; i++) {
+    var t = i / (count - 1);
     var sway = document.createElement('div');
     sway.className = 'sway';
-    sway.style.left = Math.min(99.6, Math.max(0, (i / (count - 1)) * 100 + (Math.random() - .5) * (100 / count))) + '%';
-    // a gust that travels across the garden, with a little randomness per stem
-    sway.style.animationDelay = (-(i / count) * 2.4 - Math.random() * 0.5) + 's';
-    sway.style.animationDuration = (4.2 + Math.random() * 0.9) + 's';
+    sway.style.left = (t * 100) + '%';
+    sway.style.animationDelay = (-t * 3.2 - Math.random() * 0.25) + 's';
+    sway.style.animationDuration = (4.4 + Math.random() * 0.5) + 's';
     var stem = document.createElement('div');
     stem.className = 'stem';
-    stem.style.height = (18 + Math.pow(Math.random(), 1.6) * 82) + '%';
-    if (Math.random() < .45) stem.appendChild(document.createElement('i'));
+    // A steady rising rhythm, with a little natural variation
+    var h = 7 + 86 * Math.pow(t, 1.4) + (Math.random() - .5) * 9 + Math.sin(i * 0.9) * 3;
+    stem.style.height = Math.max(4, Math.min(97, h)) + '%';
+    if (i % 3 === 0 || Math.random() < .2) {
+      var bud = document.createElement('i');
+      bud.style.setProperty('--d', (t * 4.2).toFixed(2) + 's');
+      stem.appendChild(bud);
+    }
     sway.appendChild(stem);
     stems.appendChild(sway);
   }
 
+  var nav = document.getElementById('nav');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var wv = document.getElementById('work-video');
-  if (reduce && wv) { wv.removeAttribute('autoplay'); wv.pause(); }
   if (reduce || !window.gsap || !window.ScrollTrigger) {
     document.documentElement.classList.add('static');
+    nav.classList.add('solid');
     return;
   }
   gsap.registerPlugin(ScrollTrigger);
 
   // Smooth scroll, synced with ScrollTrigger
+  var lenis = null;
   if (window.Lenis) {
-    var lenis = new Lenis({ lerp: 0.08, wheelMultiplier: 0.8, touchMultiplier: 1 });
+    lenis = new Lenis({ lerp: 0.08, wheelMultiplier: 0.8, touchMultiplier: 1 });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
     gsap.ticker.lagSmoothing(0);
+    // In-page links go through Lenis so the pinned intro stays in sync
+    document.querySelectorAll('a[href^="#"]').forEach(function(a){
+      a.addEventListener('click', function(e){
+        var id = a.getAttribute('href');
+        var el = id === '#top' ? 0 : document.querySelector(id);
+        if (el === null) return;
+        e.preventDefault();
+        lenis.scrollTo(el, { offset: id === '#top' ? 0 : -72, duration: 1.4 });
+      });
+    });
   }
 
   // Aim the zoom at the left stem of the "n", so we fly through the letter
@@ -259,13 +576,16 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20
     gsap.set(mask, { transformOrigin: ox + 'px ' + oy + 'px' });
   }
 
-  var nav = document.getElementById('nav');
-  var inScene = false, past = false;
-  var hideCta = false;
-  function paintNav(){ nav.classList.toggle('light', inScene && !past); nav.classList.toggle('hide-cta', hideCta && !past); }
+  var inScene = false, past = false, hideCta = false;
+  function paintNav(){
+    nav.classList.toggle('light', inScene && !past);
+    nav.classList.toggle('hide-cta', hideCta && !past);
+    nav.classList.toggle('solid', past);
+  }
 
   gsap.set('.scene-copy > *', { opacity: 0, y: 40 });
-  gsap.set('.stem', { scaleY: 0.04 });
+  gsap.set('.stem', { scaleY: 0 });
+  gsap.set('.stem i', { scale: 0 });
 
   function build(){
     aim();
@@ -281,16 +601,25 @@ footer{display:flex;justify-content:space-between;gap:16px;padding:32px clamp(20
       .to('.intro-line', { opacity: 0, y: 16, duration: .12, ease: 'none' }, 0)
       .to(mask, { scale: 70, duration: 1, ease: 'power3.in', force3D: false }, 0)
       .to(mask, { opacity: 0, duration: .12, ease: 'none' }, .82)
-      .to('.stem', { scaleY: 1, duration: .6, ease: 'power2.out', stagger: { each: .004, from: 'random' } }, .4)
+      .to('.stem', { scaleY: 1, duration: .32, ease: 'power2.out', stagger: { amount: .55, from: 'start' } }, .38)
+      .to('.stem i', { scale: 1, duration: .12, ease: 'back.out(3)', stagger: { amount: .55, from: 'start' } }, .62)
       .to('.scene-copy > *', { opacity: 1, y: 0, duration: .22, stagger: .06, ease: 'power2.out' }, .86)
       .addLabel('hero', 1.2)
       .to({}, { duration: .7 }, 1.2)
       .addLabel('end', 1.9);
 
     ScrollTrigger.create({
-      trigger: '#services', start: 'top 72px',
+      trigger: '#problem', start: 'top 72px',
       onEnter: function(){ past = true; paintNav(); },
       onLeaveBack: function(){ past = false; paintNav(); }
+    });
+
+    // Quiet reveals for the content below the intro
+    gsap.utils.toArray('.reveal').forEach(function(el){
+      gsap.from(el, {
+        opacity: 0, y: 28, duration: .9, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+      });
     });
   }
 
